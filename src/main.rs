@@ -5,13 +5,13 @@ use std::cmp::Ordering;
 fn main() {
   println!("Guess the number!");
 
-  let secret_number: uint = (rand::random::<uint>() % 100u) + 1u;
+  let secret_number: usize = (rand::random::<usize>() % 100us) + 1us;
 
   loop {
     println!("Please input your guess.");
 
     let input = io::stdin().read_line().ok().expect("Failed to read line");
-    let input_num: Option<uint> = input.trim().parse::<uint>();
+    let input_num: Option<usize> = input.trim().parse::<usize>();
 
     let num = match input_num {
       Some(num) => num,
@@ -34,7 +34,7 @@ fn main() {
   }
 }
 
-fn cmp(a: uint, b: uint) -> Ordering {
+fn cmp(a: usize, b: usize) -> Ordering {
   if a < b { Ordering::Less }
   else if a > b  { Ordering::Greater }
   else { Ordering::Equal }
