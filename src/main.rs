@@ -9,25 +9,30 @@ fn main() {
 
   println!("The secret number is: {}", secret_number);
 
-  println!("Please input your guess.");
+  loop {
+    println!("Please input your guess.");
 
-  let input = io::stdin().read_line().ok().expect("Failed to read line");
-  let input_num: Option<uint> = input.trim().parse::<uint>();
+    let input = io::stdin().read_line().ok().expect("Failed to read line");
+    let input_num: Option<uint> = input.trim().parse::<uint>();
 
-  let num = match input_num {
-    Some(num) => num,
-    None      => {
-      println!("Please input a number!");
-      return;
+    let num = match input_num {
+      Some(num) => num,
+      None      => {
+        println!("Please input a number!");
+        continue;
+      }
+    };
+
+    println!("You guessed: {}", num);
+
+    match cmp(num, secret_number) {
+      Ordering::Less    => println!("Too small!"),
+      Ordering::Greater => println!("Too big!"),
+      Ordering::Equal   => {
+        println!("You win!");
+        return;
+      }
     }
-  };
-
-  println!("You guessed: {}", num);
-
-  match cmp(num, secret_number) {
-    Ordering::Less    => println!("Too small!"),
-    Ordering::Greater => println!("Too big!"),
-    Ordering::Equal   => println!("You win!")
   }
 }
 
