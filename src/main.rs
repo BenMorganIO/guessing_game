@@ -7,8 +7,6 @@ fn main() {
 
   let secret_number: uint = (rand::random::<uint>() % 100u) + 1u;
 
-  println!("The secret number is: {}", secret_number);
-
   loop {
     println!("Please input your guess.");
 
